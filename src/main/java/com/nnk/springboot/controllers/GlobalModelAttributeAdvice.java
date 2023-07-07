@@ -17,7 +17,14 @@ public class GlobalModelAttributeAdvice {
 
     @ModelAttribute
     public void addConnectedUserName(Model model) {
+        /*
         User user = userService.getConnectedUser();
         model.addAttribute("username", user.getUsername());
+         */
+        User user = User.builder()
+                .username("aymeric")
+                .fullname("Aymeric Mary")
+                .build();
+        model.addAttribute("user", user);
     }
 }

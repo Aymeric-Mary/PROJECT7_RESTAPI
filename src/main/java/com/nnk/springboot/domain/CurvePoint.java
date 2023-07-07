@@ -1,9 +1,12 @@
 package com.nnk.springboot.domain;
 
+import com.nnk.springboot.utils.DateUtils;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 
 
 @Entity
@@ -20,18 +23,23 @@ public class CurvePoint {
     private Integer id;
 
     @Column(name = "curve_id")
+    @Positive
     private Integer curveId;
 
     @Column(name = "as_of_date")
-    private Timestamp asOfDate;
+    @Builder.Default
+    private Timestamp asOfDate = Timestamp.from(DateUtils.now());;
 
     @Column(name = "term")
+    @PositiveOrZero
     private Double term;
 
-    @Column(name = "value")
+    @Column(name = "val")
+    @PositiveOrZero
     private Double value;
 
     @Column(name = "creation_date")
-    private Timestamp creationDate;
+    @Builder.Default
+    private Timestamp creationDate = Timestamp.from(DateUtils.now());
 
 }

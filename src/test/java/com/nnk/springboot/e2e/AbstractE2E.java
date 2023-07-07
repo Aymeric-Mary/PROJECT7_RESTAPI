@@ -11,12 +11,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.Duration;
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
@@ -26,6 +28,7 @@ public abstract class AbstractE2E {
     @LocalServerPort
     protected int port;
     protected WebDriver driver;
+    protected WebDriverWait wait;
     protected String baseUrl;
 
     @MockBean
@@ -41,6 +44,7 @@ public abstract class AbstractE2E {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         baseUrl = "http://localhost:" + port;
     }
 

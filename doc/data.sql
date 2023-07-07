@@ -56,8 +56,8 @@ CREATE TABLE trade
 CREATE TABLE curve_point
 (
     id           tinyint(4) NOT NULL AUTO_INCREMENT,
-    curve_id      tinyint,
-    as_of_date     TIMESTAMP,
+    curve_id     tinyint NOT NULL,
+    as_of_date   TIMESTAMP,
     term         DOUBLE,
     value        DOUBLE,
     creation_date TIMESTAMP,
