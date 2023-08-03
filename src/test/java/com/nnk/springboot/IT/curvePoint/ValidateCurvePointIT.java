@@ -12,6 +12,7 @@ import org.mockito.MockedStatic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.sql.Timestamp;
@@ -41,6 +42,7 @@ public class ValidateCurvePointIT {
             mockedDateUtils.when(DateUtils::now).thenReturn(now);
             // When
             mockMvc.perform(post("/curvePoint/validate")
+                            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                             .param("curveId", "10")
                             .param("term", "12.0")
                             .param("value", "5.5")
@@ -63,21 +65,19 @@ public class ValidateCurvePointIT {
     }
 
     @WithMockPrincipal
-    @ParameterizedTest
-    @CsvSource({
-            "0,0,0"
-    })
-    void validateCurvePoint_whenParametersAreBad(String curveId, String term, String value) throws Exception {
+    @Test
+    void validateCurvePoint_whenParametersAreBad() throws Exception {
         // Given
         // When
         mockMvc.perform(post("/curvePoint/validate")
-                        .param("curveId", curveId)
-                        .param("term", term)
-                        .param("value", value)
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("curveId", "0")
+                        .param("term", "-1.0")
+                        .param("value", "-1.0")
                 )
+                // Then
                 .andExpect(status().isOk())
-                .andExpect(model().attributeHasFieldErrors("curvePoint", "curveId"))
-                .andExpect(forwardedUrl("curvePoint/add"));
-        // Then
+                .andExpect(model().attributeHasFieldErrors("curvePoint", "curveId", "term", "value"))
+                .andExpect(view().name("curvePoint/add"));
     }
 }
