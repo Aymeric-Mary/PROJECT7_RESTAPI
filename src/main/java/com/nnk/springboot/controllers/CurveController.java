@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.validation.Valid;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class CurveController {
@@ -22,7 +24,8 @@ public class CurveController {
     @RequestMapping("/curvePoint/list")
     public String curvePointList(Model model)
     {
-        // TODO: find all Curve Point, add to model
+        List<CurvePoint> curvePoints = curvePointService.findAll();
+        model.addAttribute("curvePoints", curvePoints);
         return "curvePoint/list";
     }
 
