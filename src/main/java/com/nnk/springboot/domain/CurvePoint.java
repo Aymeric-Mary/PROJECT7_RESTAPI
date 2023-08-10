@@ -28,7 +28,7 @@ public class CurvePoint {
 
     @Column(name = "as_of_date")
     @Builder.Default
-    private Timestamp asOfDate = Timestamp.from(DateUtils.now());;
+    private Instant asOfDate = DateUtils.now();
 
     @Column(name = "term")
     @PositiveOrZero
@@ -40,6 +40,6 @@ public class CurvePoint {
 
     @Column(name = "creation_date")
     @Builder.Default
-    private Timestamp creationDate = Timestamp.from(DateUtils.now());
+    private Instant creationDate = DateUtils.now();
 
 }

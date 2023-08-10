@@ -10,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class ListCurvePointTest {
     private CurvePointService curvePointServiceMock;
 
     @Test
-    public void testcurvePointList() {
+    public void testCurvePointList() {
         // Given
         Model model = new ExtendedModelMap();
         List<CurvePoint> curvePoints = List.of(

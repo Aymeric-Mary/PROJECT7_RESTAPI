@@ -1,6 +1,7 @@
 package com.nnk.springboot.e2e;
 
 import com.nnk.springboot.domain.User;
+import com.nnk.springboot.repositories.CurvePointRepository;
 import com.nnk.springboot.repositories.UserRepository;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
@@ -12,6 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -34,6 +36,9 @@ public abstract class AbstractE2E {
     @MockBean
     private UserRepository userRepository;
 
+    @Autowired
+    private CurvePointRepository curvePointRepository;
+
     @BeforeAll
     static void setupAll() {
         WebDriverManager.chromedriver().setup();
@@ -46,6 +51,7 @@ public abstract class AbstractE2E {
         driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         baseUrl = "http://localhost:" + port;
+        curvePointRepository.deleteAll();
     }
 
     @AfterEach

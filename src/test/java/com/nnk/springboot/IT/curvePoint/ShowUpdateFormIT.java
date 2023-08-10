@@ -7,18 +7,21 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-public class ListCurvePointIT {
+public class ShowUpdateFormIT {
 
     @Autowired
     private MockMvc mockMvc;
@@ -27,27 +30,31 @@ public class ListCurvePointIT {
     private CurvePointRepository curvePointRepository;
 
     @Test
-    public void testCurvePointList() throws Exception {
+    public void testShowUpdateFormWhenCurvePointExist() throws Exception {
         // Given
-        CurvePoint curvePoint1 = CurvePoint.builder()
+        CurvePoint curvePoint = CurvePoint.builder()
                 .curveId(1)
                 .term(10.0)
                 .value(15.0)
                 .build();
-        CurvePoint curvePoint2 = CurvePoint.builder()
-                .curveId(2)
-                .term(20.0)
-                .value(25.0)
-                .build();
-        curvePointRepository.saveAll(List.of(curvePoint1, curvePoint2));
+        curvePointRepository.save(curvePoint);
         // When
-        mockMvc.perform(get("/curvePoint/list"))
+        mockMvc.perform(get("/curvePoint/update/" + curvePoint.getId()))
                 // Then
                 .andExpect(status().isOk())
-                .andExpect(view().name("curvePoint/list"))
-                .andExpect(model().attributeExists("curvePoints"))
-                .andExpect(model().attribute("curvePoints", hasSize(2)))
-                .andExpect(model().attribute("curvePoints",List.of(curvePoint1, curvePoint2)));
+                .andExpect(view().name("curvePoint/update"))
+                .andExpect(model().attributeExists("curvePoint"))
+                .andExpect(model().attribute("curvePoint", curvePoint));
+    }
+
+    @Test
+    public void testShowUpdateFormWhenCurvePointNotExist() throws Exception {
+        // Given
+        // When
+        mockMvc.perform(get("/curvePoint/update/1234"))
+                // Then
+                .andExpect(status().isFound())
+                .andExpect(redirectedUrl("/curvePoint/list"));
     }
 
 }

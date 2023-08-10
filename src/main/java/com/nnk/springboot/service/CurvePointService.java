@@ -22,4 +22,14 @@ public class CurvePointService {
     public List<CurvePoint> findAll() {
         return curvePointRepository.findAll();
     }
+
+    public Optional<CurvePoint> findById(Integer id) {
+        return curvePointRepository.findById(id);
+    }
+
+    public CurvePoint update(CurvePoint existingCurvePoint, CurvePoint curvePoint) {
+        curvePointMapper.updateCurvePoint(existingCurvePoint, curvePoint);
+        existingCurvePoint.setAsOfDate(DateUtils.now());
+        return curvePointRepository.save(existingCurvePoint);
+    }
 }

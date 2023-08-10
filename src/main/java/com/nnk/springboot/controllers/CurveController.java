@@ -6,14 +6,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,8 +20,7 @@ public class CurveController {
     private final CurvePointService curvePointService;
 
     @RequestMapping("/curvePoint/list")
-    public String curvePointList(Model model)
-    {
+    public String curvePointList(Model model) {
         List<CurvePoint> curvePoints = curvePointService.findAll();
         model.addAttribute("curvePoints", curvePoints);
         return "curvePoint/list";
@@ -36,7 +33,7 @@ public class CurveController {
 
     @PostMapping("/curvePoint/validate")
     public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return "curvePoint/add";
         }
         curvePointService.create(curvePoint);
@@ -45,14 +42,22 @@ public class CurveController {
 
     @GetMapping("/curvePoint/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get CurvePoint by Id and to model then show to the form
+        Optional<CurvePoint> optionalCurvePoint = curvePointService.findById(id);
+        if (optionalCurvePoint.isEmpty()) {
+            return "redirect:/curvePoint/list";
+        }
+        model.addAttribute("curvePoint", optionalCurvePoint.get());
         return "curvePoint/update";
     }
 
     @PostMapping("/curvePoint/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
-                             BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Curve and return Curve list
+                            BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "curvePoint/update";
+        }
+        curvePointService.findById(id)
+                .ifPresent(existingCurvePoint -> curvePointService.update(existingCurvePoint, curvePoint));
         return "redirect:/curvePoint/list";
     }
 

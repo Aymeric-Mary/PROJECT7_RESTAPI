@@ -1,13 +1,11 @@
 package com.nnk.springboot.IT.curvePoint;
 
-import com.nnk.springboot.ItTools;
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.mock.WithMockPrincipal;
 import com.nnk.springboot.repositories.CurvePointRepository;
 import com.nnk.springboot.utils.DateUtils;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.MockedStatic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -15,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.sql.Timestamp;
 import java.time.Instant;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,6 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Transactional
 public class ValidateCurvePointIT {
 
     @Autowired
@@ -54,8 +52,8 @@ public class ValidateCurvePointIT {
                     .usingRecursiveFieldByFieldElementComparatorIgnoringFields("id")
                     .containsExactly(
                             CurvePoint.builder()
-                                    .creationDate(Timestamp.from(now))
-                                    .asOfDate(Timestamp.from(now))
+                                    .creationDate(now)
+                                    .asOfDate(now)
                                     .curveId(10)
                                     .term(12.0)
                                     .value(5.5)
