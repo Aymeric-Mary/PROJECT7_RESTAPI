@@ -7,6 +7,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -16,5 +18,9 @@ public class BidService {
 
     public BidList create(BidList bid) {
         return bidListRepository.save(bid);
+    }
+
+    public List<BidList> findAll() {
+        return bidListRepository.findAll();
     }
 }
