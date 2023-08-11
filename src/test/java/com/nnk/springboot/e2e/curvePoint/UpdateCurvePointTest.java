@@ -3,10 +3,7 @@ package com.nnk.springboot.e2e.curvePoint;
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.e2e.AbstractE2E;
 import com.nnk.springboot.repositories.CurvePointRepository;
-import com.nnk.springboot.utils.DateUtils;
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockedStatic;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.time.Instant;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.times;
 
 public class UpdateCurvePointTest extends AbstractE2E {
 

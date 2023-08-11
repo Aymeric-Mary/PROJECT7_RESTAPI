@@ -1,5 +1,6 @@
 package com.nnk.springboot.domain;
 
+import com.nnk.springboot.utils.DateUtils;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -65,7 +66,7 @@ public class BidList {
     private String creationName;
 
     @Column(name = "creation_date")
-    private Instant creationDate;
+    private Instant creationDate = DateUtils.now();
 
     @Column(name = "revision_name", length = 125)
     private String revisionName;
