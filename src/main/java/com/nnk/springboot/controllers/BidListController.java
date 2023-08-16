@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jakarta.validation.Valid;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -68,7 +69,7 @@ public class BidListController {
 
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Bid by Id and delete the bid, return to Bid list
+        bidService.deleteById(id);
         return "redirect:/bidList/list";
     }
 }

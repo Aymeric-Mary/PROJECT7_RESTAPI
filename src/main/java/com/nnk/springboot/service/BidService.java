@@ -34,4 +34,8 @@ public class BidService {
         bidListMapper.updateBidList(existingBidList, bidList);
         return bidListRepository.save(existingBidList);
     }
+
+    public void deleteById(Integer id) {
+        bidListRepository.deleteById(id);
+    }
 }
