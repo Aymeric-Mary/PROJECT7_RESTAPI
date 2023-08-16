@@ -47,14 +47,22 @@ public class BidListController {
 
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get Bid by Id and to model then show to the form
+        Optional<BidList> optionalBidList = bidService.findById(id);
+        if (optionalBidList.isEmpty()) {
+            return "redirect:/curvePoint/list";
+        }
+        model.addAttribute("bidList", optionalBidList.get());
         return "bidList/update";
     }
 
     @PostMapping("/bidList/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList,
                              BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Bid and return list Bid
+        if (result.hasErrors()) {
+            return "bidList/update";
+        }
+        bidService.findById(id)
+                .ifPresent(existingBidList -> bidService.update(existingBidList, bidList));
         return "redirect:/bidList/list";
     }
 
