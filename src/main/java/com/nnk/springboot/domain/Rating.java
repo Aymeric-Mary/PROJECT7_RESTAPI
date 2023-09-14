@@ -1,6 +1,8 @@
 package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
 @Entity
@@ -19,13 +21,14 @@ public class Rating {
     @Column(name = "moodys_rating",length = 125)
     private String moodysRating;
 
-    @Column(name = "sand_rating",length = 125)
-    private String sandRating;
+    @Column(name = "sand_p_rating",length = 125)
+    private String sandPRating;
 
     @Column(name = "fitch_rating",length = 125)
     private String fitchRating;
 
     @Column(name = "order_number")
+    @Positive
     private Integer orderNumber;
 
 }

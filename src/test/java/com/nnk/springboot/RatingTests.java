@@ -23,7 +23,7 @@ public class RatingTests {
 	public void ratingTest() {
 		Rating rating = Rating.builder()
 				.moodysRating("Moodys Rating")
-				.sandRating("Sand PRating")
+				.sandPRating("Sand PRating")
 				.fitchRating("Fitch Rating")
 				.orderNumber(10)
 				.build();
