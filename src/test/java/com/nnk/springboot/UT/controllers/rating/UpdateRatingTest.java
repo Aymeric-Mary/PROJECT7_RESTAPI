@@ -2,7 +2,7 @@ package com.nnk.springboot.UT.controllers.rating;
 
 import com.nnk.springboot.controllers.RatingController;
 import com.nnk.springboot.domain.Rating;
-import com.nnk.springboot.service.RatingService;
+import com.nnk.springboot.services.RatingService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,7 +17,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class UpdateRatingTest {
+class UpdateRatingTest {
 
     @Mock
     RatingService ratingServiceMock;
@@ -29,7 +29,7 @@ public class UpdateRatingTest {
     RatingController ratingController;
 
     @Test
-    public void testUpdateRatingWhenHasError() {
+    void testUpdateRatingWhenHasError() {
         // Given
         Rating rating = new Rating();
         when(bindingResultMock.hasErrors()).thenReturn(true);
@@ -40,7 +40,7 @@ public class UpdateRatingTest {
     }
 
     @Test
-    public void testUpdateRatingWhenNoError() {
+    void testUpdateRatingWhenNoError() {
         // Given
         Rating rating = new Rating();
         Rating existingRating = new Rating();

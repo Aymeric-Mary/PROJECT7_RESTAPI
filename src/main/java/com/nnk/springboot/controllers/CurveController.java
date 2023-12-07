@@ -1,7 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.service.CurvePointService;
+import com.nnk.springboot.services.CurvePointService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +27,7 @@ public class CurveController {
     }
 
     @GetMapping("/curvePoint/add")
-    public String addBidForm(CurvePoint bid) {
+    public String addCurvePointForm(CurvePoint bid) {
         return "curvePoint/add";
     }
 
@@ -51,8 +51,8 @@ public class CurveController {
     }
 
     @PostMapping("/curvePoint/update/{id}")
-    public String updateBid(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
-                            BindingResult result, Model model) {
+    public String updateCurvePoint(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
+                            BindingResult result) {
         if (result.hasErrors()) {
             return "curvePoint/update";
         }
@@ -62,7 +62,7 @@ public class CurveController {
     }
 
     @GetMapping("/curvePoint/delete/{id}")
-    public String deleteBid(@PathVariable("id") Integer id) {
+    public String deleteCurvePoint(@PathVariable("id") Integer id) {
         curvePointService.deleteById(id);
         return "redirect:/curvePoint/list";
     }

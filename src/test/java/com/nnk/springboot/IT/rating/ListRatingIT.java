@@ -1,8 +1,10 @@
 package com.nnk.springboot.IT.rating;
 
 import com.nnk.springboot.domain.Rating;
+import com.nnk.springboot.mock.WithMockPrincipal;
 import com.nnk.springboot.repositories.RatingRepository;
 import jakarta.transaction.Transactional;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -18,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-public class ListRatingIT {
+class ListRatingIT {
 
     @Autowired
     private MockMvc mockMvc;
@@ -26,8 +28,14 @@ public class ListRatingIT {
     @Autowired
     private RatingRepository ratingRepository;
 
+    @BeforeEach
+    void setUp() {
+        ratingRepository.deleteAll();
+    }
+
     @Test
-    public void testRatingList() throws Exception {
+    @WithMockPrincipal
+    void testRatingList() throws Exception {
         // Given
         Rating rating1 = Rating.builder()
                 .moodysRating("moodysRating1")

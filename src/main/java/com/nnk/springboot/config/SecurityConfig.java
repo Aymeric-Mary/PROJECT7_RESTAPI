@@ -2,6 +2,7 @@ package com.nnk.springboot.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -20,17 +21,38 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         request -> request
-                                .requestMatchers(new AntPathRequestMatcher("/desc.html"),
-                                        new AntPathRequestMatcher("/swagger-ui/**"),
-                                        new AntPathRequestMatcher("/v3/api-docs/**"),
-                                        new AntPathRequestMatcher("/actuator/**"),
-                                        new AntPathRequestMatcher("/")
+                                .requestMatchers(
+                                        new AntPathRequestMatcher("/css/**", "GET")
                                 )
                                 .permitAll()
+                                .requestMatchers(
+                                        new AntPathRequestMatcher("/*/update/**"),
+                                        new AntPathRequestMatcher("/*/delete/**"),
+                                        new AntPathRequestMatcher("/*/add/**"),
+                                        new AntPathRequestMatcher("/user/list")
+                                ).hasRole("ADMIN")
+                                .anyRequest().authenticated()
                 )
-                .authorizeHttpRequests(requests -> requests.anyRequest().permitAll());
+                .formLogin(
+                        login -> login
+                                .loginPage("/login")
+                                .defaultSuccessUrl("/bidList/list", true)
+                                .failureUrl("/login?error=true")
+                                .permitAll()
+                )
+                .logout(
+                        logout -> logout
+                                .logoutUrl("/app-logout")
+                                .logoutSuccessUrl("/login")
+                                .permitAll()
+                )
+                .exceptionHandling(
+                        exception -> exception
+                                .accessDeniedPage("/forbidden")
+                );
         return http.build();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {

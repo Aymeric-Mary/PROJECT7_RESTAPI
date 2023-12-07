@@ -1,8 +1,10 @@
 package com.nnk.springboot.IT.curvePoint;
 
 import com.nnk.springboot.domain.CurvePoint;
+import com.nnk.springboot.mock.WithMockPrincipal;
 import com.nnk.springboot.repositories.CurvePointRepository;
 import jakarta.transaction.Transactional;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -18,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-public class ListCurvePointIT {
+class ListCurvePointIT {
 
     @Autowired
     private MockMvc mockMvc;
@@ -26,8 +28,14 @@ public class ListCurvePointIT {
     @Autowired
     private CurvePointRepository curvePointRepository;
 
+    @BeforeEach
+    void setUp() {
+        curvePointRepository.deleteAll();
+    }
+
     @Test
-    public void testCurvePointList() throws Exception {
+    @WithMockPrincipal
+    void testCurvePointList() throws Exception {
         // Given
         CurvePoint curvePoint1 = CurvePoint.builder()
                 .curveId(1)

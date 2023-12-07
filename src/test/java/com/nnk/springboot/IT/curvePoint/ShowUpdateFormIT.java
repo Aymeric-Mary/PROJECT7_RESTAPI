@@ -1,6 +1,7 @@
 package com.nnk.springboot.IT.curvePoint;
 
 import com.nnk.springboot.domain.CurvePoint;
+import com.nnk.springboot.mock.WithMockPrincipal;
 import com.nnk.springboot.repositories.CurvePointRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-public class ShowUpdateFormIT {
+class ShowUpdateFormIT {
 
     @Autowired
     private MockMvc mockMvc;
@@ -24,7 +25,8 @@ public class ShowUpdateFormIT {
     private CurvePointRepository curvePointRepository;
 
     @Test
-    public void testShowUpdateFormWhenCurvePointExist() throws Exception {
+    @WithMockPrincipal
+    void testShowUpdateFormWhenCurvePointExist() throws Exception {
         // Given
         CurvePoint curvePoint = CurvePoint.builder()
                 .curveId(1)
@@ -42,7 +44,8 @@ public class ShowUpdateFormIT {
     }
 
     @Test
-    public void testShowUpdateFormWhenCurvePointNotExist() throws Exception {
+    @WithMockPrincipal
+    void testShowUpdateFormWhenCurvePointNotExist() throws Exception {
         // Given
         // When
         mockMvc.perform(get("/curvePoint/update/1234"))

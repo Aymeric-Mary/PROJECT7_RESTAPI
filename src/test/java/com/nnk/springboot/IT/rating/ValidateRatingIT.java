@@ -4,6 +4,7 @@ import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.mock.WithMockPrincipal;
 import com.nnk.springboot.repositories.RatingRepository;
 import jakarta.transaction.Transactional;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -18,13 +19,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-public class ValidateRatingIT {
+class ValidateRatingIT {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
     private RatingRepository ratingRepository;
+
+    @BeforeEach
+    void setUp() {
+        ratingRepository.deleteAll();
+    }
 
     @Test
     @WithMockPrincipal

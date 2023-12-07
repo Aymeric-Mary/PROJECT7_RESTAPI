@@ -1,7 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.Rating;
-import com.nnk.springboot.service.RatingService;
+import com.nnk.springboot.services.RatingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -66,8 +66,8 @@ public class RatingController {
     }
 
     @GetMapping("/rating/delete/{id}")
-    public String deleteRating(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Rating by Id and delete the Rating, return to Rating list
+    public String deleteRating(@PathVariable("id") Integer id) {
+        ratingService.deleteById(id);
         return "redirect:/rating/list";
     }
 }

@@ -14,13 +14,13 @@ import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TradeTests {
+class TradeTests {
 
 	@Autowired
 	private TradeRepository tradeRepository;
 
 	@Test
-	public void tradeTest() {
+	void tradeTest() {
 		Trade trade = Trade.builder()
 				.account("Trade Account")
 				.type("Type")

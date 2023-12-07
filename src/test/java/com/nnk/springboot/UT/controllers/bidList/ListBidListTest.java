@@ -2,8 +2,7 @@ package com.nnk.springboot.UT.controllers.bidList;
 
 import com.nnk.springboot.controllers.BidListController;
 import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.service.BidService;
+import com.nnk.springboot.services.BidService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ListBidListTest {
+class ListBidListTest {
 
     @InjectMocks
     private BidListController bidListController;
@@ -27,7 +26,7 @@ public class ListBidListTest {
     private BidService bidServiceMock;
 
     @Test
-    public void testCurvePointList() {
+    void testCurvePointList() {
         // Given
         Model model = new ExtendedModelMap();
         List<BidList> bids = List.of(

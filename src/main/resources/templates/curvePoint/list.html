@@ -2,7 +2,7 @@
 <div th:replace="fragments/header"></div>
 	<div class="row"><h2>Curve Point List</h2></div>
 	<div class="row">
-		<a href="/curvePoint/add" class="btn btn-primary btn-sm">Add New</a>
+		<a sec:authorize="hasRole('ROLE_ADMIN')" href="/curvePoint/add" class="btn btn-primary btn-sm">Add New</a>
 		<table class="table table-bordered">
 			<thead>
 				<tr>
@@ -10,7 +10,7 @@
 					<th>CurvePointId</th>
 					<th>Term</th>
 					<th>Value</th>
-					<th>Action</th>
+					<th sec:authorize="hasRole('ROLE_ADMIN')">Action</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -19,7 +19,7 @@
 					<td th:text="${curvePoint.curveId}"></td>
 					<td th:text="${curvePoint.term}"></td>
 					<td th:text="${curvePoint.value}"></td>
-					<td style="width: 15%" class="text-center">
+					<td sec:authorize="hasRole('ROLE_ADMIN')" style="width: 15%" class="text-center">
 						<a th:href="@{/curvePoint/update/{id}(id=${curvePoint.id})}">Edit</a>&nbsp;|&nbsp;
 						<a th:href="@{/curvePoint/delete/{id}(id=${curvePoint.id})}">Delete</a>
 					</td>

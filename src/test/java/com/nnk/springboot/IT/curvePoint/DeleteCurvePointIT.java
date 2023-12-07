@@ -1,6 +1,7 @@
 package com.nnk.springboot.IT.curvePoint;
 
 import com.nnk.springboot.domain.CurvePoint;
+import com.nnk.springboot.mock.WithMockPrincipal;
 import com.nnk.springboot.repositories.CurvePointRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-public class DeleteCurvePointIT {
+class DeleteCurvePointIT {
 
     @Autowired
     private MockMvc mockMvc;
@@ -25,7 +26,8 @@ public class DeleteCurvePointIT {
     private CurvePointRepository curvePointRepository;
 
     @Test
-    public void testCurvePointDelete() throws Exception {
+    @WithMockPrincipal
+    void testCurvePointDelete() throws Exception {
         // Given
         CurvePoint curvePoint = CurvePoint.builder()
                 .curveId(1)

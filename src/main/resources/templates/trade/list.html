@@ -2,7 +2,7 @@
 <div th:replace="fragments/header"></div>
 	<div class="row"><h2>Trade List</h2></div>
 	<div class="row">
-		<a href="/trade/add" class="btn btn-primary btn-sm">Add New</a>
+		<a sec:authorize="hasRole('ROLE_ADMIN')" href="/trade/add" class="btn btn-primary btn-sm">Add New</a>
 		<table class="table table-bordered">
 			<thead>
 				<tr>
@@ -10,7 +10,7 @@
 					<th>Account</th>
 					<th>Type</th>
 					<th>Buy Quantity</th>
-					<th>Action</th>
+					<th sec:authorize="hasRole('ROLE_ADMIN')">Action</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -19,7 +19,7 @@
 					<td th:text="${trade.account}"></td>
 					<td th:text="${trade.type}"></td>
 					<td th:text="${trade.buyQuantity}"></td>
-					<td style="width: 15%" class="text-center">
+					<td sec:authorize="hasRole('ROLE_ADMIN')" style="width: 15%" class="text-center">
 						<a th:href="@{/trade/update/{id}(id=${trade.id})}">Edit</a>&nbsp;|&nbsp;
 						<a th:href="@{/trade/delete/{id}(id=${trade.id})}">Delete</a>
 					</td>

@@ -2,8 +2,7 @@ package com.nnk.springboot.UT.controllers.rating;
 
 import com.nnk.springboot.controllers.RatingController;
 import com.nnk.springboot.domain.Rating;
-import com.nnk.springboot.service.BidService;
-import com.nnk.springboot.service.RatingService;
+import com.nnk.springboot.services.RatingService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ListRatingTest {
+class ListRatingTest {
 
     @InjectMocks
     private RatingController ratingController;
@@ -27,7 +26,7 @@ public class ListRatingTest {
     private RatingService ratingServiceMock;
 
     @Test
-    public void testCurvePointList() {
+    void testCurvePointList() {
         // Given
         Model model = new ExtendedModelMap();
         List<Rating> ratings = List.of(

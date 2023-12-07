@@ -2,7 +2,7 @@ package com.nnk.springboot.UT.controllers.rating;
 
 import com.nnk.springboot.controllers.RatingController;
 import com.nnk.springboot.domain.Rating;
-import com.nnk.springboot.service.RatingService;
+import com.nnk.springboot.services.RatingService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ValidateRatingTest {
+class ValidateRatingTest {
 
     @InjectMocks
     private RatingController ratingController;
@@ -27,7 +27,7 @@ public class ValidateRatingTest {
     private BindingResult bindingResultMock;
 
     @Test
-    public void testValidateWhenDontHasErrors() {
+    void testValidateWhenDontHasErrors() {
         // Given
         Rating rating = new Rating();
         when(bindingResultMock.hasErrors()).thenReturn(false);
@@ -39,7 +39,7 @@ public class ValidateRatingTest {
     }
 
     @Test
-    public void testValidateWhenHasErrors() {
+    void testValidateWhenHasErrors() {
         // Given
         Rating rating = new Rating();
         when(bindingResultMock.hasErrors()).thenReturn(true);

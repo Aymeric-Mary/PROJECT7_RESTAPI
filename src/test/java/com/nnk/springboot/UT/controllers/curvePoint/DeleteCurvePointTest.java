@@ -1,8 +1,7 @@
 package com.nnk.springboot.UT.controllers.curvePoint;
 
 import com.nnk.springboot.controllers.CurveController;
-import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.service.CurvePointService;
+import com.nnk.springboot.services.CurvePointService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-public class DeleteCurvePointTest {
+class DeleteCurvePointTest {
 
     @InjectMocks
     private CurveController curveController;
@@ -22,10 +21,10 @@ public class DeleteCurvePointTest {
     private CurvePointService curvePointServiceMock;
 
     @Test
-    public void testCurvePointDelete() {
+    void testCurvePointDelete() {
         // Given
         // When
-        String viewName = curveController.deleteBid(1);
+        String viewName = curveController.deleteCurvePoint(1);
         // Then
         verify(curvePointServiceMock).deleteById(1);
         assertThat(viewName).isEqualTo("redirect:/curvePoint/list");

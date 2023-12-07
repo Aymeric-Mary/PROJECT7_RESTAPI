@@ -2,11 +2,12 @@ package com.nnk.springboot.domain;
 
 import com.nnk.springboot.utils.DateUtils;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
 import java.time.Instant;
-
 
 @Entity
 @Getter
@@ -25,10 +26,6 @@ public class CurvePoint {
     @Positive
     private Integer curveId;
 
-    @Column(name = "as_of_date")
-    @Builder.Default
-    private Instant asOfDate = DateUtils.now();
-
     @Column(name = "term")
     @PositiveOrZero
     private Double term;
@@ -37,8 +34,11 @@ public class CurvePoint {
     @PositiveOrZero
     private Double value;
 
-    @Column(name = "creation_date")
+    @Column(name = "creation_date", nullable = false)
     @Builder.Default
     private Instant creationDate = DateUtils.now();
 
+    @Column(name = "as_of_date", nullable = false)
+    @Builder.Default
+    private Instant asOfDate = DateUtils.now();
 }

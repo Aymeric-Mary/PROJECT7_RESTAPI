@@ -14,13 +14,13 @@ import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CurvePointTests {
+class CurvePointTests {
 
 	@Autowired
 	private CurvePointRepository curvePointRepository;
 
 	@Test
-	public void curvePointTest() {
+	void curvePointTest() {
 		CurvePoint curvePoint = CurvePoint.builder()
 				.curveId(10)
 				.term(10d)

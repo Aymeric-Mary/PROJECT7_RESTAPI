@@ -2,6 +2,7 @@ package com.nnk.springboot.IT.bidList;
 
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.CurvePoint;
+import com.nnk.springboot.mock.WithMockPrincipal;
 import com.nnk.springboot.repositories.BidListRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-public class ListBidListIT {
+class ListBidListIT {
 
     @Autowired
     private MockMvc mockMvc;
@@ -28,7 +29,8 @@ public class ListBidListIT {
     private BidListRepository bidListRepository;
 
     @Test
-    public void testCurvePointList() throws Exception {
+    @WithMockPrincipal
+    void testCurvePointList() throws Exception {
         // Given
         BidList bidList1 = BidList.builder()
                 .account("account1")

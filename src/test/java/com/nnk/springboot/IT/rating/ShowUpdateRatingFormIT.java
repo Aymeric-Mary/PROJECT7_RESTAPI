@@ -1,6 +1,7 @@
 package com.nnk.springboot.IT.rating;
 
 import com.nnk.springboot.domain.Rating;
+import com.nnk.springboot.mock.WithMockPrincipal;
 import com.nnk.springboot.repositories.RatingRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-public class ShowUpdateRatingFormIT {
+class ShowUpdateRatingFormIT {
 
     @Autowired
     private MockMvc mockMvc;
@@ -24,7 +25,8 @@ public class ShowUpdateRatingFormIT {
     private RatingRepository ratingRepository;
 
     @Test
-    public void testShowUpdateFormWhenRatingExist() throws Exception {
+    @WithMockPrincipal
+    void testShowUpdateFormWhenRatingExist() throws Exception {
         // Given
         Rating rating = Rating.builder()
                 .moodysRating("moodysRating")
@@ -43,7 +45,8 @@ public class ShowUpdateRatingFormIT {
     }
 
     @Test
-    public void testShowUpdateFormWhenRatingNotExist() throws Exception {
+    @WithMockPrincipal
+    void testShowUpdateFormWhenRatingNotExist() throws Exception {
         // Given
         // When
         mockMvc.perform(get("/rating/update/1234"))

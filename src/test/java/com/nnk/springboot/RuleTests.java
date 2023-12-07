@@ -14,13 +14,13 @@ import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RuleTests {
+class RuleTests {
 
 	@Autowired
 	private RuleNameRepository ruleNameRepository;
 
 	@Test
-	public void ruleTest() {
+	void ruleTest() {
 		RuleName rule = RuleName.builder()
 				.name("Rule Name")
 				.description("Description")

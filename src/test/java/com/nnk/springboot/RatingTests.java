@@ -14,13 +14,13 @@ import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RatingTests {
+class RatingTests {
 
 	@Autowired
 	private RatingRepository ratingRepository;
 
 	@Test
-	public void ratingTest() {
+	void ratingTest() {
 		Rating rating = Rating.builder()
 				.moodysRating("Moodys Rating")
 				.sandPRating("Sand PRating")

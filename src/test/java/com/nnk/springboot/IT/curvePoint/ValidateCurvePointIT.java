@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-public class ValidateCurvePointIT {
+class ValidateCurvePointIT {
 
     @Autowired
     private MockMvc mockMvc;

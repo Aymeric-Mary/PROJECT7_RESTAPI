@@ -2,7 +2,7 @@
 <div th:replace="fragments/header"></div>
 	<div class="row"><h2>Rating List</h2></div>
 	<div class="row">
-		<a href="/rating/add" class="btn btn-primary btn-sm">Add New</a>
+		<a sec:authorize="hasRole('ROLE_ADMIN')" href="/rating/add" class="btn btn-primary btn-sm">Add New</a>
 		<table class="table table-bordered">
 			<thead>
 				<tr>
@@ -15,13 +15,13 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="rating : ${ratings}">
+				<tr sec:authorize="hasRole('ROLE_ADMIN')" th:each="rating : ${ratings}">
 					<td style="width: 10%" th:text="${rating.id}"></td>
 					<td th:text="${rating.moodysRating}"></td>
 					<td th:text="${rating.sandPRating}"></td>
 					<td th:text="${rating.fitchRating}"></td>
-					<td th:text="${rating.order}"></td>
-					<td style="width: 15%" class="text-center">
+					<td th:text="${rating.orderNumber}"></td>
+					<td sec:authorize="hasRole('ROLE_ADMIN')" style="width: 15%" class="text-center">
 						<a th:href="@{/rating/update/{id}(id=${rating.id})}">Edit</a>&nbsp;|&nbsp;
 						<a th:href="@{/rating/delete/{id}(id=${rating.id})}">Delete</a>
 					</td>

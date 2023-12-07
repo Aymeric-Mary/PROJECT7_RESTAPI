@@ -14,13 +14,13 @@ import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class BidTests {
+class BidTests {
 
 	@Autowired
 	private BidListRepository bidListRepository;
 
 	@Test
-	public void bidListTest() {
+	void bidListTest() {
 		BidList bid = BidList.builder()
 				.account("Account Test")
 				.type("Type Test")

@@ -2,7 +2,7 @@ package com.nnk.springboot.UT.controllers.curvePoint;
 
 import com.nnk.springboot.controllers.CurveController;
 import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.service.CurvePointService;
+import com.nnk.springboot.services.CurvePointService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ListCurvePointTest {
+class ListCurvePointTest {
 
     @InjectMocks
     private CurveController curveController;
@@ -26,7 +26,7 @@ public class ListCurvePointTest {
     private CurvePointService curvePointServiceMock;
 
     @Test
-    public void testCurvePointList() {
+    void testCurvePointList() {
         // Given
         Model model = new ExtendedModelMap();
         List<CurvePoint> curvePoints = List.of(

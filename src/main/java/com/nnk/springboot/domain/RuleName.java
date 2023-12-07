@@ -1,10 +1,12 @@
 package com.nnk.springboot.domain;
 
+import com.nnk.springboot.utils.DateUtils;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
-import java.sql.Timestamp;
+import java.time.Instant;
 
 @Entity
 @Getter
@@ -19,21 +21,21 @@ public class RuleName {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "name",length = 125)
+    @Column(name = "name", length = 125)
     private String name;
 
-    @Column(name = "description",length = 125)
+    @Column(name = "description", length = 125)
     private String description;
 
-    @Column(name = "json",length = 125)
+    @Column(name = "json", length = 125)
     private String json;
 
-    @Column(name = "template",length = 125)
+    @Column(name = "template", length = 125)
     private String template;
 
-    @Column(name = "sql_str",length = 125)
+    @Column(name = "sql_str", length = 125)
     private String sqlStr;
 
-    @Column(name = "sql_part",length = 125)
+    @Column(name = "sql_part", length = 125)
     private String sqlPart;
 }

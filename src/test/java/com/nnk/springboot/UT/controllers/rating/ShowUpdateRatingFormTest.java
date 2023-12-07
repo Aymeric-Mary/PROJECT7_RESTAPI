@@ -2,7 +2,7 @@ package com.nnk.springboot.UT.controllers.rating;
 
 import com.nnk.springboot.controllers.RatingController;
 import com.nnk.springboot.domain.Rating;
-import com.nnk.springboot.service.RatingService;
+import com.nnk.springboot.services.RatingService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ShowUpdateRatingFormTest {
+class ShowUpdateRatingFormTest {
 
     @InjectMocks
     private RatingController ratingController;
@@ -26,7 +26,7 @@ public class ShowUpdateRatingFormTest {
     private RatingService ratingServiceMock;
 
     @Test
-    public void testShowUpdateFormWhenRatingExist() {
+    void testShowUpdateFormWhenRatingExist() {
         // Given
         Model model = new ExtendedModelMap();
         Rating rating = new Rating();
@@ -39,7 +39,7 @@ public class ShowUpdateRatingFormTest {
     }
 
     @Test
-    public void testShowUpdateFormWhenRatingDontExist() {
+    void testShowUpdateFormWhenRatingDontExist() {
         // Given
         Model model = new ExtendedModelMap();
         when(ratingServiceMock.findById(1234)).thenReturn(Optional.empty());

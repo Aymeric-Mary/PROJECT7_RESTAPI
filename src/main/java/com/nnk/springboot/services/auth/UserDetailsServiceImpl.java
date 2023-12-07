@@ -3,6 +3,8 @@ package com.nnk.springboot.services.auth;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,6 +19,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     /**
      * Load the user by email
+     *
      * @param username the email of the user
      * @return the user
      * @throws UsernameNotFoundException if the user is not found
@@ -25,8 +28,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
-
+        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(user.getRole());
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-                List.of());
+                List.of(grantedAuthority));
     }
 }

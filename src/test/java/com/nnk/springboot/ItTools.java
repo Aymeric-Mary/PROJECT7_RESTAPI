@@ -8,7 +8,7 @@ import java.time.Instant;
 
 import static org.mockito.Mockito.mockStatic;
 
-public class ItTools {
+class ItTools {
 
     private MockedStatic<Instant> mockedInstant;
 

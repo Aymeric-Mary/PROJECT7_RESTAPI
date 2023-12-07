@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import java.util.Optional;
+
 @ControllerAdvice
 @Component
 @RequiredArgsConstructor
@@ -17,14 +19,11 @@ public class GlobalModelAttributeAdvice {
 
     @ModelAttribute
     public void addConnectedUserName(Model model) {
-        /*
-        User user = userService.getConnectedUser();
-        model.addAttribute("username", user.getUsername());
-         */
-        User user = User.builder()
-                .username("aymeric")
-                .fullname("Aymeric Mary")
-                .build();
-        model.addAttribute("user", user);
+        Optional<User> user = userService.getConnectedUser();
+        if (user.isEmpty()) {
+            return;
+        }
+        model.addAttribute("username", user.get().getUsername());
+        model.addAttribute("user", user.get());
     }
 }

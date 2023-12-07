@@ -12,5 +12,5 @@ public @interface WithMockPrincipal {
 
     String id() default "id";
 
-    String[] authorities() default {"USER"};
+    String[] authorities() default {"ADMIN"};
 }
