@@ -20,7 +20,6 @@ class WithMockPrincipalSecurityContextFactory implements WithSecurityContextFact
     public SecurityContext createSecurityContext(WithMockPrincipal principal) {
         SecurityContext context = SecurityContextHolder.getContext();
         List<GrantedAuthority> grantedAuthorities = Stream.of(principal.authorities())
-                .map(role -> "ROLE_" + role.toUpperCase())
                 .map(authority -> (GrantedAuthority) new SimpleGrantedAuthority(authority))
                 .toList();
         User user = new User("test", "password", grantedAuthorities);
