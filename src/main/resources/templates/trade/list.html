@@ -1,32 +1,32 @@
 <div th:replace="fragments/head"></div>
 <div th:replace="fragments/header"></div>
-	<div class="row"><h2>Trade List</h2></div>
-	<div class="row">
-		<a sec:authorize="hasRole('ROLE_ADMIN')" href="/trade/add" class="btn btn-primary btn-sm">Add New</a>
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Account</th>
-					<th>Type</th>
-					<th>Buy Quantity</th>
-					<th sec:authorize="hasRole('ROLE_ADMIN')">Action</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="trade : ${trades}">
-					<td style="width: 10%" th:text="${trade.id}"></td>
-					<td th:text="${trade.account}"></td>
-					<td th:text="${trade.type}"></td>
-					<td th:text="${trade.buyQuantity}"></td>
-					<td sec:authorize="hasRole('ROLE_ADMIN')" style="width: 15%" class="text-center">
-						<a th:href="@{/trade/update/{id}(id=${trade.id})}">Edit</a>&nbsp;|&nbsp;
-						<a th:href="@{/trade/delete/{id}(id=${trade.id})}">Delete</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+<div class="row"><h2>Trade List</h2></div>
+<div class="row">
+    <a sec:authorize="hasAuthority('ADMIN')" href="/trade/add" class="btn btn-primary btn-sm">Add New</a>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Account</th>
+            <th>Type</th>
+            <th>Buy Quantity</th>
+            <th sec:authorize="hasAuthority('ADMIN')">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="trade : ${trades}">
+            <td style="width: 10%" th:text="${trade.id}"></td>
+            <td th:text="${trade.account}"></td>
+            <td th:text="${trade.type}"></td>
+            <td th:text="${trade.buyQuantity}"></td>
+            <td sec:authorize="hasAuthority('ADMIN')" style="width: 15%" class="text-center">
+                <a th:href="@{/trade/update/{id}(id=${trade.id})}">Edit</a>&nbsp;|&nbsp;
+                <a th:href="@{/trade/delete/{id}(id=${trade.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </div>
 </body>
 </html>

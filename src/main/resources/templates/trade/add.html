@@ -1,12 +1,10 @@
 <div th:replace="fragments/head"></div>
-<div th:replace="fragments/header"></div>
 <div class="row">
-    <h2>Update Bid</h2>
+    <h2>Add New Trade</h2>
 </div>
 
 <div class="row">
-    <form action="#" th:action="@{/bidList/update/{id}(id=${bidList.id})}" th:object="${bidList}" method="post"
-          class="form-horizontal" style="width: 100%">
+    <form action="#" th:action="@{/trade/validate}" th:object="${trade}" method="post" class="form-horizontal" style="width: 100%">
         <div class="form-group">
             <label for="account" class="col-sm-2 control-label">Account</label>
             <div class="col-sm-10">
@@ -22,20 +20,18 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="bidQuantity" class="col-sm-2 control-label">Bid Quantity</label>
+            <label for="buyQuantity" class="col-sm-2 control-label">Buy Quantity</label>
             <div class="col-sm-10">
-                <input type="number" th:field="*{bidQuantity}" id="bidQuantity" placeholder="Bid Quantity"
-                       class="col-4">
-                <p class="text-danger" th:if="${#fields.hasErrors('bidQuantity')}" th:errors="*{bidQuantity}"></p>
+                <input type="number" th:field="*{buyQuantity}" id="buyQuantity" placeholder="Buy Quantity" class="col-4">
+                <p class="text-danger" th:if="${#fields.hasErrors('buyQuantity')}" th:errors="*{buyQuantity}"></p>
             </div>
         </div>
 
 
         <div class="form-group">
             <div class="col-sm-12">
-                <input type="hidden" th:field="*{id}">
-                <a id="cancel" class="btn btn-danger btn-sm" href="/bidList/list">Cancel</a>
-                <button class="btn btn-primary btn-sm" type="submit">Update Bid List</button>
+                <a class="btn btn-danger btn-sm" href="/trade/list">Cancel</a>
+                <input class="btn btn-primary btn-sm" type="submit" value="Add Trade">
             </div>
         </div>
     </form>

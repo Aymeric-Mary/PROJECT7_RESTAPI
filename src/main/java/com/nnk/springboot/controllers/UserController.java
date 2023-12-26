@@ -2,6 +2,7 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -15,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jakarta.validation.Valid;
 
 @Controller
+@RequiredArgsConstructor
 public class UserController {
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @RequestMapping("/user/list")
     public String home(Model model)
