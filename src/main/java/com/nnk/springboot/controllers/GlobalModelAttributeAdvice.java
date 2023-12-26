@@ -24,6 +24,5 @@ public class GlobalModelAttributeAdvice {
             return;
         }
         model.addAttribute("username", user.get().getUsername());
-        model.addAttribute("user", user.get());
     }
 }

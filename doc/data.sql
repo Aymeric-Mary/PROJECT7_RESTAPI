@@ -70,8 +70,8 @@ CREATE TABLE user
 )
 
 insert into user(fullname, username, password, role)
--- password is "admin"
-values ("Administrator", "admin", "$2a$10$XwUSEyiHXUrDTxhnskxk4umsZ9JsbSLH2CRM6uru4t/ff23aAfJEK", "ADMIN")
+-- password is "admin?Password1"
+values ("Administrator", "admin", "$2a$10$uks71Llkq1wi944IPWMKt.UJprPiFPJPIYBaQetZIv6igT/sqKBU.", "ADMIN")
 insert into user(fullname, username, password, role)
--- password is "user"
-values ("User", "user", "$2a$10$o3oqAMgQ3EJrEoEB7RaJ/O4eicDlqg2iCbHaapGxpVpD5spq15MUu", "USER")
+-- password is "user?Password1"
+values ("User", "user", "$2a$10$LTsoY.FbD9oNzwZlCXtnnuDMbZToYm4OD5M5cJ.1YujUh7nq7v4za", "USER")
