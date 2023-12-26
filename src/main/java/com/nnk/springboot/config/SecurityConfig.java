@@ -30,7 +30,7 @@ public class SecurityConfig {
                                         new AntPathRequestMatcher("/*/delete/**"),
                                         new AntPathRequestMatcher("/*/add/**"),
                                         new AntPathRequestMatcher("/user/list")
-                                ).permitAll()
+                                ).hasAuthority("ADMIN")
                                 .anyRequest().authenticated()
                 )
                 .formLogin(
